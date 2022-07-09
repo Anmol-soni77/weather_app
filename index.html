@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/7e0c38e1f7.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="weathercon">
+
+        </div>
+        <h2 id="status">{%status%}</h2>
+        <div id="info">
+            <h2 class="location">{%location%}</h2>
+            <p id="date">WED | JUL 6 | 9:33PM</p>
+            <h1 class="temp">{%temp%} k</h1>
+            <h3 class="tempminmax">Min {%mintemp%} k | Max {%maxtemp%} k</h3>
+        </div>
+    </div>
+    <script>
+        const weathericon = document.getElementById('weathercon');
+        const status = document.getElementById('status');
+
+        if (status.innerText == "Clouds") {
+            weathericon.innerHTML = '<i class="fa-solid fa-cloud"></i>';
+        }
+        else if (status.innerText == "Clear"){
+            weathericon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+        else{
+            weathericon.innerHTML = '<i class="fa-brands fa-adn"></i>';
+        }
+        const Datee = document.getElementById('date');
+        function getall(){
+            let date = new Date();
+            const days = [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun",
+            ]
+            const months = [
+                "jan",
+                "feb",
+                "mar",
+                "apr",
+                "may",
+                "jun",
+                "jul",
+                "aug",
+                "sep",
+                "oct",
+                "nov",
+                "dec",
+            ]
+            let month = months[date.getMonth()]
+            let day = days[date.getDay()-1]
+            let datee = date.getDate();
+            let hourr = date.getHours();
+            let period = "AM";
+            function gethour(ho){
+                if(ho<10){
+                    ho = "0"+ho;
+                    console.log(ho);
+                }
+                if(ho>11){
+                    ho = ho-12;
+                    if(period == "AM"){
+                        period="PM";
+                    }
+                }
+                return ho;
+            } 
+            let hour = gethour(hourr);
+            let min = date.getMinutes();
+            function getminn(mi){
+                if(mi<10){
+                    mi = ("0"+mi);
+                }
+                return mi;
+            }
+            let mins = getminn(min);
+            Datee.innerText = `${day} | ${month} ${datee} | ${hour}:${mins} ${period}`;
+        }
+        getall();
+    </script>
+</body>
+</html>
