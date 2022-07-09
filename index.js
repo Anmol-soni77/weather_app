@@ -1,6 +1,7 @@
 const http = require('http')
 const request = require('requests')
 const fs = require('fs')
+const port = process.env.PORT || 8000;
 
 let homefile = fs.readFileSync('index.html','utf-8');
 
@@ -31,7 +32,6 @@ const server = http.createServer((req,res)=>{
         res.send("Error Occured");
     }
 })
-
-server.listen(3000,()=>{
-    console.log("Your server is running on http://127.0.0.1:3000");
+server.listen(port,()=>{
+    console.log(`Your server is running on http://127.0.0.1:${port}`);
 })
